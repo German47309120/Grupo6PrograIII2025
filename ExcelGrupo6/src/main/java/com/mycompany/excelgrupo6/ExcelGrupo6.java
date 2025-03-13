@@ -16,7 +16,9 @@ public class ExcelGrupo6 {
         int a=10;
         int b=5;
         int c= a+b;
+        int d= a/b;
         
         System.out.println("total: " +c);
+        System.out.println("total: " +d);
     }
 }
