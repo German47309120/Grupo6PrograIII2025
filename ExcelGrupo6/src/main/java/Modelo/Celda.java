@@ -9,16 +9,23 @@ package Modelo;
  * @author German Hernández
  */
 //Se declara los valores para usar el movimiento en clase celda
+//Celda hace referencia a los nodos de la lista enlasada
+
 public class Celda {
 
      String valor;
      Celda derecha;
      Celda abajo;
+     Celda arriba;
+     Celda izquierda;
+     
 
     public Celda(String valor) {
         this.valor = valor;
         this.derecha = null;
         this.abajo = null;
+        this.arriba = null;
+        this.izquierda = null;
     }
 
     public String getValor() {
@@ -44,10 +51,21 @@ public class Celda {
     public void setAbajo(Celda abajo) {
         this.abajo = abajo;
     }
+       
+    public Celda getArriba() {
+        return arriba;
+    }
+
+    public void setArriba(Celda arriba) {
+        this.arriba = arriba;
+    }
+
+    public Celda getIzquierda() {
+        return izquierda;
+    }
+
+    public void setIzquierda(Celda izquirda) {
+        this.izquierda = izquirda;
+    }
+
 }
-
-
-
-
-
-
