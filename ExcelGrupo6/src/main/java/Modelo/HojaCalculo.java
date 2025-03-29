@@ -194,7 +194,7 @@ public class HojaCalculo {
     
     // Método para mostrar la hoja de cálculo
     public void mostrarHoja(int numFilas, int numColumnas) {
-        System.out.println("Contenido de la Hoja de Cálculo:");
+        System.out.println("Contenido de la Hoja de Calculo:");
         for (int i = 0; i < numFilas; i++) {
             for (int j = 0; j < numColumnas; j++) {
                 String valor = obtenerValor(i, j);

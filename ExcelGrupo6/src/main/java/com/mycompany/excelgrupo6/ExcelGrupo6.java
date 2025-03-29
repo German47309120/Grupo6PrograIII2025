@@ -5,6 +5,7 @@
 package com.mycompany.excelgrupo6;
 
 import Modelo.HojaCalculo;
+import Operaciones.Modificacion;
 import java.util.Scanner;
 
 /**
@@ -29,6 +30,9 @@ public class ExcelGrupo6 {
         HojaCalculo hoja = new HojaCalculo();
         hoja.crearEstructura(numFilas, numColumnas);
         
+        Modificacion modificador = new Modificacion(hoja); //para modificar datos
+
+        
         boolean salir = false;
         int filaActual = 0;
         int columnaActual = 0;
@@ -45,7 +49,11 @@ public class ExcelGrupo6 {
             System.out.println("2. Mover a la celda de abajo");
             System.out.println("3. Mover a la celda de la derecha");
             System.out.println("4. Cambiar a una posicion especifica");
-            System.out.println("5. Salir");
+            System.out.println("5. Limpiar celda actual");
+            System.out.println("6. Reemplazar un valor de la hoja");
+            System.out.println("7. Cambiar tamaño de la hoja (filas y columnas)");
+
+            System.out.println("8. Salir");
             System.out.print("Seleccione una opcion: ");
             
             int opcion = scanner.nextInt();
@@ -85,9 +93,47 @@ public class ExcelGrupo6 {
                         System.out.println("Posicion fuera de rango.");
                     }
                     break;
-                case 5:
-                    salir = true;
+                case 5:modificador.vaciarCelda(filaActual, columnaActual);
+                
                     break;
+                case 6:
+                     System.out.print("Ingrese el valor que desea reemplazar: ");
+                     String valorBuscado = scanner.nextLine();
+                     System.out.print("Ingrese el nuevo valor: ");
+                     String nuevoValor = scanner.nextLine();
+                     modificador.reemplazarValor(valorBuscado, nuevoValor, numFilas, numColumnas);
+                     break;
+                case 7:
+                    System.out.print("Ingrese el nuevo numero de filas: ");
+                    int nuevasFilas = scanner.nextInt();
+                    System.out.print("Ingrese el nuevo numero de columnas: ");
+                    int nuevasColumnas = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar buffer
+
+                    HojaCalculo nuevaHoja = new HojaCalculo();
+                    nuevaHoja.crearEstructura(nuevasFilas, nuevasColumnas);
+
+                    for (int i = 0; i < Math.min(numFilas, nuevasFilas); i++) {
+                    for (int j = 0; j < Math.min(numColumnas, nuevasColumnas); j++) {
+                    String valorAntiguo = hoja.obtenerValor(i, j);
+                    nuevaHoja.establecerValor(i, j, valorAntiguo);
+            }
+        }
+
+        hoja = nuevaHoja;
+        modificador = new Modificacion(hoja);
+        numFilas = nuevasFilas;
+        numColumnas = nuevasColumnas;
+        filaActual = 0;
+        columnaActual = 0;
+
+        System.out.println("Se ha actualizado la hoja ");
+        break;     
+                     
+                case 8:
+                     salir = true;
+                    break;
+ 
                 default:
                     System.out.println("Opcion no valida.");
             }
