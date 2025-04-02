@@ -192,17 +192,28 @@ public class HojaCalculo {
         return columnaActual;
     }
     
-    // Método para mostrar la hoja de cálculo
+    // Método para mostrar la hoja de cálculo con encabezados
     public void mostrarHoja(int numFilas, int numColumnas) {
-        System.out.println("Contenido de la Hoja de Calculo:");
-        for (int i = 0; i < numFilas; i++) {
-            for (int j = 0; j < numColumnas; j++) {
-                String valor = obtenerValor(i, j);
-                System.out.print((valor != null ? valor : "") + "\t");
-            }
-            System.out.println();
+    System.out.println("Contenido de la Hoja de Calculo:");
+
+    // Imprimir encabezado de columnas (letras)
+    System.out.print("\t");
+    for (int col = 0; col < numColumnas; col++) {
+        System.out.print((char) ('A' + col) + "\t");
+    }
+    System.out.println();
+
+    // Imprimir cada fila con su número al inicio
+    for (int i = 0; i < numFilas; i++) {
+        System.out.print((i + 1) + "\t"); // número de fila
+        for (int j = 0; j < numColumnas; j++) {
+            String valor = obtenerValor(i, j);
+            System.out.print((valor != null && !valor.isEmpty() ? valor : "-") + "\t");
         }
-    }    
+        System.out.println();
+    }
+}
+
     
     public Celda obtenerCelda(int indiceFila, int indiceColumna) {
     Fila filaObjetivo = obtenerFila(indiceFila);

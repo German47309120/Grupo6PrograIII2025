@@ -71,14 +71,14 @@ public class ExcelGrupo6 {
                     if (filaActual < numFilas - 1) {
                         filaActual++;
                     } else {
-                        System.out.println("Ya se encuentra en la ultima fila.");
+                        System.out.println("Ya se encuentra en la ultima fila");
                     }
                     break;
                 case 3:
                     if (columnaActual < numColumnas - 1) {
                         columnaActual++;
                     } else {
-                        System.out.println("Ya se encuentra en la ultima columna.");
+                        System.out.println("Ya se encuentra en la ultima columna");
                     }
                     break;
                 case 4:
@@ -96,23 +96,42 @@ public class ExcelGrupo6 {
                         filaActual = filaInterna;
                         columnaActual = columnaInterna;
                         } else {
-                        System.out.println("Posicion fuera de rango.");
+                        System.out.println("Posicion fuera de rango");
                         }                 
                     break;
                 case 5:
                     operaciones.realizarOperacion();
                     break;
-                case 6:modificador.vaciarCelda(filaActual, columnaActual);
-                
+                case 6:
+                        System.out.print("¿Esta seguro que desea limpiar esta celda? (s/n): ");
+                        String confirmacion = scanner.nextLine();
+                        if (confirmacion.equalsIgnoreCase("s")) {
+                        modificador.vaciarCelda(filaActual, columnaActual);
+                        } else {
+                        System.out.println("La celda no fue modificada");
+                        }                
                     break;
                 case 7:
                      System.out.print("Ingrese el valor que desea reemplazar: ");
-                     String valorBuscado = scanner.nextLine();
-                     System.out.print("Ingrese el nuevo valor: ");
-                     String nuevoValor = scanner.nextLine();
-                     modificador.reemplazarValor(valorBuscado, nuevoValor, numFilas, numColumnas);
-                     break;
+                    String valorBuscado = scanner.nextLine();
+
+                    System.out.print("Ingrese el nuevo valor: ");
+                    String nuevoValor = scanner.nextLine();
+
+                    System.out.print("¿Esta seguro que desea reemplazar todas las ocurrencias de \"" + valorBuscado + "\" por \"" + nuevoValor + "\"? (s/n): ");
+                    String confirmacionReemplazo = scanner.nextLine();
+
+                    if (confirmacionReemplazo.equalsIgnoreCase("s")) {
+                    modificador.reemplazarValor(valorBuscado, nuevoValor, numFilas, numColumnas);
+                     } else {
+                    System.out.println("No se realizo ningun cambio.");
+                    }
+                    break;
                 case 8:
+                    System.out.print("Esta accion cambiara las dimensiones de la hoja y podria eliminar datos fuera del nuevo area. ¿Desea continuar? (s/n): ");
+                    String confirmarDimension = scanner.nextLine();
+
+                    if (confirmarDimension.equalsIgnoreCase("s")) {
                     System.out.print("Ingrese el nuevo numero de filas: ");
                     int nuevasFilas = scanner.nextInt();
                     System.out.print("Ingrese el nuevo numero de columnas: ");
@@ -126,25 +145,27 @@ public class ExcelGrupo6 {
                     for (int j = 0; j < Math.min(numColumnas, nuevasColumnas); j++) {
                     String valorAntiguo = hoja.obtenerValor(i, j);
                     nuevaHoja.establecerValor(i, j, valorAntiguo);
-            }
-        }
+                    }
+                    }
 
-        hoja = nuevaHoja;
-        modificador = new Modificacion(hoja);
-        numFilas = nuevasFilas;
-        numColumnas = nuevasColumnas;
-        filaActual = 0;
-        columnaActual = 0;
+                    hoja = nuevaHoja;
+                    modificador = new Modificacion(hoja);
+                    numFilas = nuevasFilas;
+                    numColumnas = nuevasColumnas;
+                    filaActual = 0;
+                    columnaActual = 0;
 
-        System.out.println("Se ha actualizado la hoja ");
-        break;     
-                     
+                    System.out.println("Se ha actualizado el area de la hoja conservando los datos posibles");
+                    } else {
+                    System.out.println("No se realizaron cambios en las dimensiones");
+                    }
+                    break;
                 case 9:
                      salir = true;
                     break;
  
                 default:
-                    System.out.println("Opcion no valida.");
+                    System.out.println("Opcion no valida");
             }
         }
         

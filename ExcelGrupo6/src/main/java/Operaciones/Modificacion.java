@@ -27,7 +27,7 @@ public class Modificacion {
     // Vaciar (borrar) el valor de una celda
     public void vaciarCelda(int fila, int columna) {
         hoja.establecerValor(fila, columna, "");
-        System.out.println("Celda [" + fila + "," + columna + "] ha sido vaciada.");
+        System.out.println("Celda [" + fila + "," + columna + "] ha sido vaciada");
     }
 
     // Reemplazar un valor específico por otro en toda la hoja
@@ -37,7 +37,7 @@ public class Modificacion {
                 String actual = hoja.obtenerValor(i, j);
                 if (actual != null && actual.equals(valorBuscado)) {
                     hoja.establecerValor(i, j, nuevoValor);
-                    System.out.println("Valor en [" + i + "," + j + "] reemplazado.");
+                    System.out.println("Valor en [" + i + "," + j + "] reemplazado");
                 }
             }
         }

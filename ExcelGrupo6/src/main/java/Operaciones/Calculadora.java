@@ -49,7 +49,7 @@ public class Calculadora {
         int[] indices2 = convertirReferenciaAIndices(ref2);
         
         if (indices1 == null || indices2 == null) {
-            System.out.println("Error: Referencia de celda inválida.");
+            System.out.println("Error: Referencia de celda invalida.");
             return null;
         }
         
@@ -59,7 +59,7 @@ public class Calculadora {
         
         // Verificar que los valores no sean nulos
         if (valorStr1 == null || valorStr2 == null || valorStr1.isEmpty() || valorStr2.isEmpty()) {
-            System.out.println("Nel mijo: Una o ambas celdas están vacías.");
+            System.out.println("Nel mijo: Una o ambas celdas están vacias");
             return null;
         }
         
@@ -111,7 +111,7 @@ public class Calculadora {
             resultadoStr = String.valueOf(resultado);
         }
         
-        System.out.println("Operación: " + valorStr1 + " " + operador + " " + valorStr2 + " = " + resultadoStr);
+        System.out.println("Operacion: " + valorStr1 + " " + operador + " " + valorStr2 + " = " + resultadoStr);
         
         // Preguntar si se desea guardar el resultado en alguna celda
         System.out.print("¿Desea guardar el resultado en una celda? (S/N): ");
