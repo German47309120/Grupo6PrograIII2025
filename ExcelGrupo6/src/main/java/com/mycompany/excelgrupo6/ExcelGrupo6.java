@@ -157,6 +157,7 @@ public class ExcelGrupo6 {
 
                     hoja = nuevaHoja;
                     modificador = new Modificacion(hoja);
+                    operaciones = new Calculadora(hoja);
                     numFilas = nuevasFilas;
                     numColumnas = nuevasColumnas;
                     filaActual = 0;
