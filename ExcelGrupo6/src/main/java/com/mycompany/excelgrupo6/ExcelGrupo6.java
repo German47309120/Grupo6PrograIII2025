@@ -82,22 +82,29 @@ public class ExcelGrupo6 {
                     }
                     break;
                 case 4:
-                    System.out.print("Ingrese el numero de fila: ");
-                    int nuevaFila = scanner.nextInt();
-                    System.out.print("Ingrese el numero de columna: ");
-                    int nuevaColumna = scanner.nextInt();
-                    scanner.nextLine(); // Consumir el salto de línea
-    
-                    // Convertir de base 1 (interfaz de usuario) a base 0 (lógica interna)
-                    int filaInterna = nuevaFila - 1;
-                    int columnaInterna = nuevaColumna - 1;
-    
-                    if (filaInterna >= 0 && filaInterna < numFilas && columnaInterna >= 0 && columnaInterna < numColumnas) {
-                        filaActual = filaInterna;
-                        columnaActual = columnaInterna;
-                        } else {
-                        System.out.println("Posicion fuera de rango");
-                        }                 
+                    System.out.print("Ingrese la celda a la que desea ir (ej: A1): ");
+                    String entrada = scanner.nextLine().toUpperCase();
+
+                    if (entrada.length() >= 2 && Character.isLetter(entrada.charAt(0))) {
+                    char letraColumna = entrada.charAt(0);
+                    int fila;
+
+                    try {
+                    fila = Integer.parseInt(entrada.substring(1)) - 1;
+                    int columna = letraColumna - 'A';
+
+                    if (fila >= 0 && fila < numFilas && columna >= 0 && columna < numColumnas) {
+                    filaActual = fila;
+                    columnaActual = columna;
+                    } else {
+                    System.out.println("La celda esta fuera de rango");
+                    }
+                    } catch (NumberFormatException e) {
+                    System.out.println("Formato incorrecto Ejemplo valido: A1, B2, C3...");
+                    }
+                    } else {
+                    System.out.println("Formato invalido Ejemplo valido: A1, B2, C3...");
+                    }              
                     break;
                 case 5:
                     operaciones.realizarOperacion();
