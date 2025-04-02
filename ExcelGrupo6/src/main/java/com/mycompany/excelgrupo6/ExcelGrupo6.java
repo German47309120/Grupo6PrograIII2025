@@ -48,14 +48,16 @@ public class ExcelGrupo6 {
             System.out.println("\nOpciones:");
             System.out.println("1. Ingresar valor en la posicion actual");
             System.out.println("2. Mover a la celda de abajo");
-            System.out.println("3. Mover a la celda de la derecha");
-            System.out.println("4. Cambiar a una posicion especifica");
-            System.out.println("5. Realizar operaciones");
-            System.out.println("6. Limpiar celda actual");
-            System.out.println("7. Reemplazar un valor de la hoja");
-            System.out.println("8. Cambiar dimensiones de la hoja (filas y columnas)");
+            System.out.println("3. Mover a la celda de arriba");
+            System.out.println("4. Mover a la celda de la derecha");
+            System.out.println("5. Mover a la celda de la Izquierda");
+            System.out.println("6. Cambiar a una posicion especifica");
+            System.out.println("7. Realizar operaciones");
+            System.out.println("8. Limpiar celda actual");
+            System.out.println("9. Reemplazar un valor de la hoja");
+            System.out.println("10. Cambiar dimensiones de la hoja (filas y columnas)");
 
-            System.out.println("9. Salir");
+            System.out.println("11. Salir");
             System.out.print("Seleccione una opcion: ");
             
             int opcion = scanner.nextInt();
@@ -74,14 +76,29 @@ public class ExcelGrupo6 {
                         System.out.println("Ya se encuentra en la ultima fila");
                     }
                     break;
-                case 3:
+                case 3:  
+                    if (filaActual < numFilas - 1) {
+                        filaActual--;
+                    } else {
+                        System.out.println("Ya se encuentra en la primera fila");
+                    }
+                    break;
+                case 4:
                     if (columnaActual < numColumnas - 1) {
                         columnaActual++;
                     } else {
                         System.out.println("Ya se encuentra en la ultima columna");
                     }
                     break;
-                case 4:
+                case 5:
+                    if (columnaActual < numColumnas - 1) {
+                        columnaActual--;
+                    } else {
+                        System.out.println("Ya se encuentra en la primera columna");
+                    }
+                    break;
+                    
+                case 6:
                     System.out.print("Ingrese la celda a la que desea ir (ej: A1): ");
                     String entrada = scanner.nextLine().toUpperCase();
 
@@ -106,10 +123,10 @@ public class ExcelGrupo6 {
                     System.out.println("Formato invalido Ejemplo valido: A1, B2, C3...");
                     }              
                     break;
-                case 5:
+                case 7:
                     operaciones.realizarOperacion();
                     break;
-                case 6:
+                case 8:
                         System.out.print("¿Esta seguro que desea limpiar esta celda? (s/n): ");
                         String confirmacion = scanner.nextLine();
                         if (confirmacion.equalsIgnoreCase("s")) {
@@ -118,7 +135,7 @@ public class ExcelGrupo6 {
                         System.out.println("La celda no fue modificada");
                         }                
                     break;
-                case 7:
+                case 9:
                      System.out.print("Ingrese el valor que desea reemplazar: ");
                     String valorBuscado = scanner.nextLine();
 
@@ -134,7 +151,7 @@ public class ExcelGrupo6 {
                     System.out.println("No se realizo ningun cambio.");
                     }
                     break;
-                case 8:
+                case 10:
                     System.out.print("Esta accion cambiara las dimensiones de la hoja y podria eliminar datos fuera del nuevo area. ¿Desea continuar? (s/n): ");
                     String confirmarDimension = scanner.nextLine();
 
@@ -168,7 +185,7 @@ public class ExcelGrupo6 {
                     System.out.println("No se realizaron cambios en las dimensiones");
                     }
                     break;
-                case 9:
+                case 11:
                      salir = true;
                     break;
  

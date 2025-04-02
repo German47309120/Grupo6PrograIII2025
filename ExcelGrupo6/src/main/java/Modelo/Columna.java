@@ -11,19 +11,23 @@ package Modelo;
 public class Columna {
   // se crean atributos partiendo de la misma clase 
      Columna columnaDerecha;
+     
      Celda primeraCelda;
 
     public Columna() {  //Se inicia el constructor con los datos en 0
         this.columnaDerecha = null;
+        
         this.primeraCelda = null;
     }
 
     public void setColumnaDerecha(Columna columna) {
         this.columnaDerecha = columna;
+        
     }
 
     public Columna getColumnaDerecha() {
         return columnaDerecha;
+        
     }
 
     public void agregarCelda(String valor) {

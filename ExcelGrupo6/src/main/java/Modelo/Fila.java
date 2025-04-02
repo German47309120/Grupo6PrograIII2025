@@ -11,6 +11,7 @@ package Modelo;
 public class Fila {
     // se crean atributos partiendo de la misma clase 
      Fila filaAbajo;
+     
      Celda primeraCelda;
 
     public Fila() { //Se inicia el constructor con los datos en 0
@@ -25,7 +26,7 @@ public class Fila {
     public Fila getFilaAbajo() {
         return filaAbajo;
     }
-
+    
     public void agregarCelda(String valor) {
         Celda nuevaCelda = new Celda(valor); //Crea un nuevo valor
         if (primeraCelda == null) {
