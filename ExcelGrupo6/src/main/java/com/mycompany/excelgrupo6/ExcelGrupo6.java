@@ -5,6 +5,7 @@
 package com.mycompany.excelgrupo6;
 
 import Modelo.HojaCalculo;
+import Operaciones.Calculadora;
 import Operaciones.Modificacion;
 import java.util.Scanner;
 
@@ -31,16 +32,16 @@ public class ExcelGrupo6 {
         hoja.crearEstructura(numFilas, numColumnas);
         
         Modificacion modificador = new Modificacion(hoja); //para modificar datos
-
+        Calculadora operaciones = new Calculadora(hoja);
         
         boolean salir = false;
-        int filaActual = 0;
+        int filaActual = 0; 
         int columnaActual = 0;
         
         while (!salir) {
             System.out.println("\n--- Hoja de Calculo ---");
             hoja.mostrarHoja(numFilas, numColumnas);
-            System.out.println("\nPosicion actual: Fila " + filaActual + ", Columna " + columnaActual);
+            System.out.println("\nPosicion actual: Fila " + (filaActual+1) + ", Columna " + (columnaActual+1));
             System.out.println("Valor actual: " + (hoja.obtenerValor(filaActual, columnaActual) != null ? 
                                                   hoja.obtenerValor(filaActual, columnaActual) : "vacio"));
             
@@ -49,11 +50,12 @@ public class ExcelGrupo6 {
             System.out.println("2. Mover a la celda de abajo");
             System.out.println("3. Mover a la celda de la derecha");
             System.out.println("4. Cambiar a una posicion especifica");
-            System.out.println("5. Limpiar celda actual");
-            System.out.println("6. Reemplazar un valor de la hoja");
-            System.out.println("7. Cambiar tamaño de la hoja (filas y columnas)");
+            System.out.println("5. Realizar operaciones");
+            System.out.println("6. Limpiar celda actual");
+            System.out.println("7. Reemplazar un valor de la hoja");
+            System.out.println("8. Cambiar dimensiones de la hoja (filas y columnas)");
 
-            System.out.println("8. Salir");
+            System.out.println("9. Salir");
             System.out.print("Seleccione una opcion: ");
             
             int opcion = scanner.nextInt();
@@ -85,25 +87,32 @@ public class ExcelGrupo6 {
                     System.out.print("Ingrese el numero de columna: ");
                     int nuevaColumna = scanner.nextInt();
                     scanner.nextLine(); // Consumir el salto de línea
-                    
-                    if (nuevaFila >= 0 && nuevaFila < numFilas && nuevaColumna >= 0 && nuevaColumna < numColumnas) {
-                        filaActual = nuevaFila;
-                        columnaActual = nuevaColumna;
-                    } else {
+    
+                    // Convertir de base 1 (interfaz de usuario) a base 0 (lógica interna)
+                    int filaInterna = nuevaFila - 1;
+                    int columnaInterna = nuevaColumna - 1;
+    
+                    if (filaInterna >= 0 && filaInterna < numFilas && columnaInterna >= 0 && columnaInterna < numColumnas) {
+                        filaActual = filaInterna;
+                        columnaActual = columnaInterna;
+                        } else {
                         System.out.println("Posicion fuera de rango.");
-                    }
+                        }                 
                     break;
-                case 5:modificador.vaciarCelda(filaActual, columnaActual);
+                case 5:
+                    operaciones.realizarOperacion();
+                    break;
+                case 6:modificador.vaciarCelda(filaActual, columnaActual);
                 
                     break;
-                case 6:
+                case 7:
                      System.out.print("Ingrese el valor que desea reemplazar: ");
                      String valorBuscado = scanner.nextLine();
                      System.out.print("Ingrese el nuevo valor: ");
                      String nuevoValor = scanner.nextLine();
                      modificador.reemplazarValor(valorBuscado, nuevoValor, numFilas, numColumnas);
                      break;
-                case 7:
+                case 8:
                     System.out.print("Ingrese el nuevo numero de filas: ");
                     int nuevasFilas = scanner.nextInt();
                     System.out.print("Ingrese el nuevo numero de columnas: ");
@@ -130,7 +139,7 @@ public class ExcelGrupo6 {
         System.out.println("Se ha actualizado la hoja ");
         break;     
                      
-                case 8:
+                case 9:
                      salir = true;
                     break;
  
