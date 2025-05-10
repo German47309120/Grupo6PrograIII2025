@@ -213,7 +213,26 @@ public class HojaCalculo {
         System.out.println();
     }
 }
-
+    
+    public void redimensionar(int nuevasFilas, int nuevasColumnas) {
+    HojaCalculo nuevaHoja = new HojaCalculo();
+    nuevaHoja.crearEstructura(nuevasFilas, nuevasColumnas);
+    
+    // Copiar datos existentes
+    Fila filaActual = primeraFila;
+    for (int i = 0; i < nuevasFilas && filaActual != null; i++) {
+        Celda celdaActual = filaActual.getPrimeraCelda();
+        for (int j = 0; j < nuevasColumnas && celdaActual != null; j++) {
+            nuevaHoja.establecerValor(i, j, celdaActual.getValor());
+            celdaActual = celdaActual.getDerecha();
+        }
+        filaActual = filaActual.getFilaAbajo();
+    }
+    
+    // SE actualiza la estructura
+    this.primeraFila = nuevaHoja.primeraFila;
+    this.primeraColumna = nuevaHoja.primeraColumna;
+}
     
     public Celda obtenerCelda(int indiceFila, int indiceColumna) {
     Fila filaObjetivo = obtenerFila(indiceFila);

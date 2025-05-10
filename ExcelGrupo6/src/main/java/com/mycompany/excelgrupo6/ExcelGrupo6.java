@@ -73,6 +73,8 @@ public class ExcelGrupo6 {
         int filaActual = 0;
         int columnaActual = 0;
         boolean salirHoja = false;
+        //
+        //
 
         while (!salirHoja) {
             System.out.println("\n--- Hoja de Calculo ---");
@@ -104,33 +106,35 @@ public class ExcelGrupo6 {
                     String valor = scanner.nextLine();
                     hoja.establecerValor(filaActual, columnaActual, valor);
                     break;
-                case 2:
-                    if (filaActual < numFilas - 1) {
-                        filaActual++;
-                    } else {
-                        System.out.println("Ya esta en la ultima fila");
+                case 2: // Moverse abajo
+                    if (filaActual >= numFilas - 1) {
+                        System.out.print("Llmite inferior alcanzado. Desea agregar mas filas? (s/n): ");
+                        if (scanner.nextLine().equalsIgnoreCase("s")) {
+                            int nuevasFilas = numFilas + 1;
+                            hoja.redimensionar(nuevasFilas, numColumnas);
+                            numFilas = nuevasFilas;
+                            System.out.println("Se agrego una nueva fila. Total: " + numFilas);
+                        }
                     }
+                    filaActual = Math.min(filaActual + 1, numFilas - 1);
                     break;
                 case 3:
-                    if (filaActual > 0) {
-                        filaActual--;
-                    } else {
-                        System.out.println("Ya esta en la primera fila");
-                    }
+                        filaActual = Math.max(0, filaActual - 1);
                     break;
-                case 4:
-                    if (columnaActual < numColumnas - 1) {
-                        columnaActual++;
-                    } else {
-                        System.out.println("Ya esta en la ultima columna");
+                case 4: // Moverse a la derecha
+                    if (columnaActual >= numColumnas - 1) {
+                        System.out.print("Limite derecho alcanzado. Desea agregar mas columnas? (s/n): ");
+                        if (scanner.nextLine().equalsIgnoreCase("s")) {
+                            int nuevasColumnas = numColumnas + 1;
+                            hoja.redimensionar(numFilas, nuevasColumnas);
+                            numColumnas = nuevasColumnas;
+                            System.out.println("Se agrego una nueva columna. Total: " + numColumnas);
+                        }
                     }
+                    columnaActual = Math.min(columnaActual + 1, numColumnas - 1);
                     break;
-                case 5:
-                    if (columnaActual > 0) {
-                        columnaActual--;
-                    } else {
-                        System.out.println("Ya esta en la primera columna");
-                    }
+                case 5: // Moverse a la izquierda
+                    columnaActual = Math.max(0, columnaActual - 1);
                     break;
                 case 6:
                     System.out.print("Ingrese la celda (Ej: A1): ");
@@ -140,6 +144,40 @@ public class ExcelGrupo6 {
                         try {
                             int fila = Integer.parseInt(entrada.substring(1)) - 1;
                             int columna = letraColumna - 'A';
+            
+                            // Verificacion para ver si la posicon esta fuera de rango
+                            if (fila >= numFilas || columna >= numColumnas) {
+                                System.out.print("Posicion fuera de rango Desea redimensionar la hoja? (s/n): ");
+                                if (scanner.nextLine().equalsIgnoreCase("s")) {
+                                    // Calcular nuevas dimensiones (actual + diferencia necesaria + 1 como buffer)
+                                    int nuevasFilas = Math.max(numFilas, fila + 1);
+                                    int nuevasColumnas = Math.max(numColumnas, columna + 1);
+                    
+                                    // Redimension
+                                    HojaCalculo nuevaHoja = new HojaCalculo();
+                                    nuevaHoja.crearEstructura(nuevasFilas, nuevasColumnas);
+                    
+                                    // Copiar datos existentes
+                                    for (int i = 0; i < numFilas; i++) {
+                                        for (int j = 0; j < numColumnas; j++) {
+                                            String val = hoja.obtenerValor(i, j);
+                                            nuevaHoja.establecerValor(i, j, val);
+                                        }
+                                    }
+                    
+                                    hoja = nuevaHoja;
+                                    modificador = new Modificacion(hoja);
+                                    operaciones = new Calculadora(hoja);
+                                    numFilas = nuevasFilas;
+                                    numColumnas = nuevasColumnas;
+                                    System.out.println("Hoja redimensionada a " + numFilas + " filas x " + numColumnas + " columnas");
+                                } else {
+                                    System.out.println("Operacion cancelada");
+                                    break;
+                                }
+                            }
+            
+                            // Verificar los limites despues de posible redimension
                             if (fila >= 0 && fila < numFilas && columna >= 0 && columna < numColumnas) {
                                 filaActual = fila;
                                 columnaActual = columna;
