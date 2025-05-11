@@ -229,7 +229,7 @@ public class HojaCalculo {
         filaActual = filaActual.getFilaAbajo();
     }
     
-    // SE actualiza la estructura
+    // Se actualiza la estructura
     this.primeraFila = nuevaHoja.primeraFila;
     this.primeraColumna = nuevaHoja.primeraColumna;
 }
