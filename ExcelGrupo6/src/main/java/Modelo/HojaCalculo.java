@@ -77,7 +77,7 @@ public class HojaCalculo {
             posActual++;
         }
         
-        // Si llegamos al final y aún no alcanzamos la posición deseada
+        // Si llegamos al final y aun no alcanzamos la posición deseada
         if (celdaActual == null) {
             // Necesitamos agregar celdas hasta llegar a la posición deseada
             for (int i = 0; i <= indiceColumna; i++) {
@@ -109,7 +109,7 @@ public class HojaCalculo {
         Celda celdaActual = columnaObjetivo.getPrimeraCelda();
         int posActual = 0;
         
-        // Similar a la lógica de filas pero para columnas
+        // Similar a la logica de filas pero para columnas
         if (indiceFila == 0) {
             if (celdaActual == null) {
                 columnaObjetivo.agregarCelda(valor);
