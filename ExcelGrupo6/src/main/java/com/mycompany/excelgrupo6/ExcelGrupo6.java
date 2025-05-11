@@ -347,7 +347,6 @@ public class ExcelGrupo6 {
         }
     }
 
-    // Metodo opcional si deseas insertar nodos directamente (no usado ahora)
     public static void guardarNodoEnBD(int valor) {
         try (Connection conn = ConexionBD.getConnection()) {
             String sql = "INSERT INTO arbolAVL (valor, idTipoArbol) VALUES (?, 2)";

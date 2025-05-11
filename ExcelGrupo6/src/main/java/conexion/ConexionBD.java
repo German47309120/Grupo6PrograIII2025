@@ -15,7 +15,7 @@ public class ConexionBD {
 
     private static final String URL = "jdbc:mysql://localhost:3307/proyectoAVL";
     private static final String USER = "root";
-    private static final String PASSWORD = ""; // deja vacío si no pusiste contraseña
+    private static final String PASSWORD = "";
 
     public static Connection getConnection() {
         Connection conn = null;

@@ -21,7 +21,7 @@ public class Celda {
      
 
     public Celda(String valor) {
-        this.valor = valor;
+        this.valor = valor;        
         this.derecha = null;
         this.abajo = null;
         this.arriba = null;

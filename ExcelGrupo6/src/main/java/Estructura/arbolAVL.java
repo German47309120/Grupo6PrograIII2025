@@ -25,10 +25,10 @@ public class arbolAVL {
 
     // Verifica si un valor ya existe
     public boolean contiene(int valor) {
-        return contieneRecursivo(raiz, valor);
+        return obtenerRecurrente(raiz, valor);
     }
 
-    private boolean contieneRecursivo(nodoAVL nodo, int valor) {
+    private boolean obtenerRecurrente(nodoAVL nodo, int valor) {
         if (nodo == null) {
             return false;
         }
@@ -36,24 +36,24 @@ public class arbolAVL {
             return true;
         }
         if (valor < nodo.valor) {
-            return contieneRecursivo(nodo.izquierda, valor);
+            return obtenerRecurrente(nodo.izquierda, valor);
         }
-        return contieneRecursivo(nodo.derecha, valor);
+        return obtenerRecurrente(nodo.derecha, valor);
     }
 
     // Inserta un nodo en el arbol
     public void insertar(int valor) {
-        raiz = insertarRecursivo(raiz, valor);
+        raiz = agregarRecurrente(raiz, valor);
     }
 
-    private nodoAVL insertarRecursivo(nodoAVL nodo, int valor) {
+    private nodoAVL agregarRecurrente(nodoAVL nodo, int valor) {
         if (nodo == null) {
             return new nodoAVL(valor);
         }
         if (valor < nodo.valor) {
-            nodo.izquierda = insertarRecursivo(nodo.izquierda, valor);
+            nodo.izquierda = agregarRecurrente(nodo.izquierda, valor);
         } else if (valor > nodo.valor) {
-            nodo.derecha = insertarRecursivo(nodo.derecha, valor);
+            nodo.derecha = agregarRecurrente(nodo.derecha, valor);
         } else {
             return nodo;
         }
@@ -64,25 +64,25 @@ public class arbolAVL {
 
     // Elimina un nodo
     public void eliminar(int valor) {
-        raiz = eliminarRecursivo(raiz, valor);
+        raiz = eliminarRecurrente(raiz, valor);
     }
 
-    private nodoAVL eliminarRecursivo(nodoAVL nodo, int valor) {
+    private nodoAVL eliminarRecurrente(nodoAVL nodo, int valor) {
         if (nodo == null) {
             return null;
         }
 
         if (valor < nodo.valor) {
-            nodo.izquierda = eliminarRecursivo(nodo.izquierda, valor);
+            nodo.izquierda = eliminarRecurrente(nodo.izquierda, valor);
         } else if (valor > nodo.valor) {
-            nodo.derecha = eliminarRecursivo(nodo.derecha, valor);
+            nodo.derecha = eliminarRecurrente(nodo.derecha, valor);
         } else {
             if (nodo.izquierda == null || nodo.derecha == null) {
                 nodo = (nodo.izquierda != null) ? nodo.izquierda : nodo.derecha;
             } else {
-                nodoAVL sucesor = obtenerMinimo(nodo.derecha);
+                nodoAVL sucesor = minimo(nodo.derecha);
                 nodo.valor = sucesor.valor;
-                nodo.derecha = eliminarRecursivo(nodo.derecha, sucesor.valor);
+                nodo.derecha = eliminarRecurrente(nodo.derecha, sucesor.valor);
             }
         }
 
@@ -94,7 +94,7 @@ public class arbolAVL {
         return balancear(nodo);
     }
 
-    private nodoAVL obtenerMinimo(nodoAVL nodo) {
+    private nodoAVL minimo(nodoAVL nodo) {
         while (nodo.izquierda != null) {
             nodo = nodo.izquierda;
         }
@@ -110,19 +110,19 @@ public class arbolAVL {
 
     // Guarda el arbol completo en la BD
     public void guardarEnBD() {
-        guardarRecursivo(raiz);
+        guardarRecurrente(raiz);
         System.out.println("AVL guardado en la base de datos.");
     }
 
-    private void guardarRecursivo(nodoAVL nodo) {
+    private void guardarRecurrente(nodoAVL nodo) {
         if (nodo != null) {
-            guardarRecursivo(nodo.izquierda);
-            guardarNodoEnBD(nodo.valor);
-            guardarRecursivo(nodo.derecha);
+            guardarRecurrente(nodo.izquierda);
+            almacenarBD(nodo.valor);
+            guardarRecurrente(nodo.derecha);
         }
     }
 
-    private void guardarNodoEnBD(int valor) {
+    private void almacenarBD(int valor) {
         try (Connection conn = ConexionBD.getConnection()) {
             String sql = "INSERT INTO arbolAVL (valor, idTipoArbol) VALUES (?, 2)";
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -138,22 +138,22 @@ public class arbolAVL {
         return (nodo == null) ? 0 : nodo.altura;
     }
 
-    private int factorBalance(nodoAVL nodo) {
+    private int valorBalance(nodoAVL nodo) {
         return (nodo == null) ? 0 : altura(nodo.izquierda) - altura(nodo.derecha);
     }
 
     private nodoAVL balancear(nodoAVL nodo) {
-        int balance = factorBalance(nodo);
+        int balance = valorBalance(nodo);
 
         if (balance > 1) {
-            if (factorBalance(nodo.izquierda) < 0) {
+            if (valorBalance(nodo.izquierda) < 0) {
                 nodo.izquierda = rotarIzquierda(nodo.izquierda);
             }
             return rotarDerecha(nodo);
         }
 
         if (balance < -1) {
-            if (factorBalance(nodo.derecha) > 0) {
+            if (valorBalance(nodo.derecha) > 0) {
                 nodo.derecha = rotarDerecha(nodo.derecha);
             }
             return rotarIzquierda(nodo);

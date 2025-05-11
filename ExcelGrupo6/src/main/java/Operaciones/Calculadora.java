@@ -103,7 +103,7 @@ public class Calculadora {
                 return null;
         }
         
-        // Formatear resultado, eliminando decimales si es un número entero
+        // Formatear resultado, eliminando decimales si es un numero entero
         String resultadoStr;
         if (resultado == (int) resultado) {
             resultadoStr = String.valueOf((int) resultado);
@@ -133,11 +133,7 @@ public class Calculadora {
         return resultadoStr;
     }
     
-    /**
-     * Convierte una referencia de celda estilo Excel (A1, B2, etc.) a índices [fila, columna]
-     * @param referencia La referencia en formato Excel
-     * @return Un array de dos elementos [fila, columna] o null si la referencia es inválida
-     */
+    
     private int[] convertirReferenciaAIndices(String referencia) {
         try {
             // Separar letras (columnas) y números (filas)
