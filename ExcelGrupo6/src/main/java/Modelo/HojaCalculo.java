@@ -251,7 +251,7 @@ public class HojaCalculo {
     return celdaActual;
 }
 
-// Navegar a la celda de abajo desde una posición específica
+// Navegar a la celda de abajo desde una posicion específica
     public Celda navegarAbajo(int indiceFila, int indiceColumna) {
     Celda celdaActual = obtenerCelda(indiceFila, indiceColumna);
     if (celdaActual == null) {
