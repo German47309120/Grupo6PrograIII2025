@@ -14,6 +14,7 @@ import Modelo.HojaCalculo;
 import Operaciones.Calculadora;
 import Operaciones.Modificacion;
 import Estructura.arbolAVL;
+import Memoria.Ejecucion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,7 +32,8 @@ public class ExcelGrupo6 {
             System.out.println("\n--- SISTEMA GRUPO 6 ---");
             System.out.println("1. Hoja de Calculo");
             System.out.println("2. Arbol AVL");
-            System.out.println("3. Salir");
+            System.out.println("3. Administracion de Memoria");
+            System.out.println("4. Salir ");
             System.out.print("Seleccione una opcion: ");
 
             int opcion = scanner.nextInt();
@@ -46,8 +48,12 @@ public class ExcelGrupo6 {
                     subMenuAVL(scanner, arbol);     // Llama al submenu AVL
                     break;
                 case 3:
+                    Ejecucion.Menu(scanner);
+                    break;
+                    
+                case 4:
                     salir = true;
-                    System.out.println("Gracias por usar el sistema");
+                    System.out.println("Saliendo del sistema");
                     break;
                 default:
                     System.out.println("Opcion invalida");
@@ -119,7 +125,7 @@ public class ExcelGrupo6 {
                     filaActual = Math.min(filaActual + 1, numFilas - 1);
                     break;
                 case 3:
-                        filaActual = Math.max(0, filaActual - 1);
+                    filaActual = Math.max(0, filaActual - 1);
                     break;
                 case 4: // Moverse a la derecha
                     if (columnaActual >= numColumnas - 1) {
@@ -144,7 +150,7 @@ public class ExcelGrupo6 {
                         try {
                             int fila = Integer.parseInt(entrada.substring(1)) - 1;
                             int columna = letraColumna - 'A';
-            
+
                             // Verificacion para ver si la posicon esta fuera de rango
                             if (fila >= numFilas || columna >= numColumnas) {
                                 System.out.print("Posicion fuera de rango Desea redimensionar la hoja? (s/n): ");
@@ -152,11 +158,11 @@ public class ExcelGrupo6 {
                                     // Calcular nuevas dimensiones (actual + diferencia necesaria + 1 como buffer)
                                     int nuevasFilas = Math.max(numFilas, fila + 1);
                                     int nuevasColumnas = Math.max(numColumnas, columna + 1);
-                    
+
                                     // Redimension
                                     HojaCalculo nuevaHoja = new HojaCalculo();
                                     nuevaHoja.crearEstructura(nuevasFilas, nuevasColumnas);
-                    
+
                                     // Copiar datos existentes
                                     for (int i = 0; i < numFilas; i++) {
                                         for (int j = 0; j < numColumnas; j++) {
@@ -164,7 +170,7 @@ public class ExcelGrupo6 {
                                             nuevaHoja.establecerValor(i, j, val);
                                         }
                                     }
-                    
+
                                     hoja = nuevaHoja;
                                     modificador = new Modificacion(hoja);
                                     operaciones = new Calculadora(hoja);
@@ -176,7 +182,7 @@ public class ExcelGrupo6 {
                                     break;
                                 }
                             }
-            
+
                             // Verificar los limites despues de posible redimension
                             if (fila >= 0 && fila < numFilas && columna >= 0 && columna < numColumnas) {
                                 filaActual = fila;
