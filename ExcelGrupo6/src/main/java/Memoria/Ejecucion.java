@@ -10,7 +10,7 @@ package Memoria;
  */
 import java.util.*;
 public class Ejecucion {
-      public static void mostrarMenu(Scanner scanner) {
+      public static void verMenu(Scanner scanner) {
         boolean volver = false;
 
         while (!volver) {
@@ -43,6 +43,6 @@ public class Ejecucion {
     }
 
     public static void Menu(Scanner scanner) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

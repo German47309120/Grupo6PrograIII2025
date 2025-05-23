@@ -48,8 +48,9 @@ public class ExcelGrupo6 {
                     subMenuAVL(scanner, arbol);     // Llama al submenu AVL
                     break;
                 case 3:
-                    Ejecucion.Menu(scanner);
-                    break;
+                    Ejecucion.verMenu(scanner);
+              
+                      break;
                     
                 case 4:
                     salir = true;
